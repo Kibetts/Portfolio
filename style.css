@@ -643,3 +643,25 @@ body {
 .btn-loader {
     color: rgba(255, 255, 255, 0.8);
 }
+
+@media (max-width: 768px) {
+    .modal-content {
+        margin: 1rem;
+        width: calc(100% - 2rem);
+    }
+    
+    .modal-header,
+    .contact-form {
+        padding: 1.5rem;
+    }
+    
+    .form-buttons {
+        flex-direction: column;
+    }
+    
+    .btn-cancel,
+    .btn-submit {
+        width: 100%;
+        padding: 1rem;
+    }
+}
