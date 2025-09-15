@@ -71,3 +71,20 @@ body {
 .nav-links a:hover::after {
     width: 100%;
 }
+
+.cta-btn {
+    background: #ff4757;
+    color: white;
+    padding: 0.5rem 1.5rem;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.cta-btn:hover {
+    background: #ff3838;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 71, 87, 0.4);
+}
