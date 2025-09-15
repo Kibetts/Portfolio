@@ -332,3 +332,37 @@ body {
     opacity: 0.8;
     line-height: 1.6;
 }
+
+
+/* Stats Section */
+.stats {
+    padding: 4rem 2rem;
+    text-align: center;
+}
+
+.stats-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+}
+
+.stat-item {
+    padding: 2rem;
+}
+
+.stat-number {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #ff4757;
+    margin-bottom: 0.5rem;
+}
+
+.stat-label {
+    font-size: 1.1rem;
+    opacity: 0.8;
+}
