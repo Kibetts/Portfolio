@@ -349,3 +349,46 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 5000);
         }
     }
+
+    / Handle form submission
+    if (contactForm) {
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                message: document.getElementById('message').value
+            };
+            
+            const errors = validateForm(formData);
+            
+            if (Object.keys(errors).length > 0) {
+                displayFormErrors(errors);
+                return;
+            }
+            
+            // Show loading state
+            const submitBtn = document.getElementById('submitBtn');
+            const btnText = submitBtn.querySelector('.btn-text');
+            const btnLoader = submitBtn.querySelector('.btn-loader');
+            
+            if (btnText && btnLoader) {
+                btnText.style.display = 'none';
+                btnLoader.style.display = 'inline-block';
+                submitBtn.disabled = true;
+            }
+            
+            // Simulate email sending (replace with actual email service)
+            setTimeout(() => {
+                console.log('Form submitted:', formData);
+                
+                if (btnText && btnLoader) {
+                    btnText.style.display = 'inline-block';
+                    btnLoader.style.display = 'none';
+                    submitBtn.disabled = false;
+                }
+                showSuccessMessage();
+            }, 2000);
+        });
+    }
