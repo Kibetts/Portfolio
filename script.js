@@ -266,3 +266,27 @@ document.addEventListener('DOMContentLoaded', function() {
             openContactModal();
         });
     }
+    // Event listeners for closing modal
+    if (closeModal) {
+        closeModal.addEventListener('click', closeContactModal);
+    }
+
+    if (cancelBtn) {
+        cancelBtn.addEventListener('click', closeContactModal);
+    }
+
+    // Close modal when clicking outside
+    if (contactModal) {
+        contactModal.addEventListener('click', (e) => {
+            if (e.target === contactModal) {
+                closeContactModal();
+            }
+        });
+    }
+
+    // Close modal with Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && contactModal && contactModal.classList.contains('active')) {
+            closeContactModal();
+        }
+    });
