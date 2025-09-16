@@ -290,3 +290,62 @@ document.addEventListener('DOMContentLoaded', function() {
             closeContactModal();
         }
     });
+
+     // Form validation and submission
+    function validateForm(formData) {
+        const errors = {};
+        
+        if (!formData.name || formData.name.trim().length < 2) {
+            errors.name = 'Name must be at least 2 characters long';
+        }
+        
+        if (!formData.email || !/\S+@\S+\.\S+/.test(formData.email)) {
+            errors.email = 'Please enter a valid email address';
+        }
+        
+        if (!formData.message || formData.message.trim().length < 10) {
+            errors.message = 'Message must be at least 10 characters long';
+        }
+        
+        return errors;
+    }
+
+    function displayFormErrors(errors) {
+        // Clear previous errors
+        clearFormErrors();
+        
+        // Display new errors
+        Object.keys(errors).forEach(field => {
+            const errorElement = document.getElementById(`${field}Error`);
+            const inputElement = document.getElementById(field);
+            
+            if (errorElement && inputElement) {
+                errorElement.textContent = errors[field];
+                inputElement.style.borderColor = '#ff6b6b';
+            }
+        });
+    }
+
+    function clearFormErrors() {
+        const errorElements = document.querySelectorAll('.error-message');
+        const inputElements = document.querySelectorAll('.form-group input, .form-group textarea');
+        
+        errorElements.forEach(el => el.textContent = '');
+        inputElements.forEach(el => el.style.borderColor = 'rgba(255, 255, 255, 0.2)');
+    }
+
+    function showSuccessMessage() {
+        if (contactForm) {
+            const successDiv = document.createElement('div');
+            successDiv.className = 'success-message';
+            successDiv.innerHTML = '✅ Thank you! Your message has been sent successfully. I\'ll get back to you soon!';
+            
+            contactForm.parentNode.insertBefore(successDiv, contactForm);
+            
+            setTimeout(() => {
+                successDiv.remove();
+                closeContactModal();
+                contactForm.reset();
+            }, 5000);
+        }
+    }
