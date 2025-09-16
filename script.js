@@ -56,3 +56,40 @@ const counterObserver = new IntersectionObserver((entries) => {
         }
     });
 });
+
+counters.forEach(counter => {
+    counterObserver.observe(counter);
+});
+
+// Particle system
+function createParticle() {
+    const particle = document.createElement('div');
+    particle.classList.add('particle');
+    particle.style.left = Math.random() * 100 + '%';
+    particle.style.animationDelay = Math.random() * 15 + 's';
+    const particlesContainer = document.getElementById('particles');
+    if (particlesContainer) {
+        particlesContainer.appendChild(particle);
+    }
+
+    setTimeout(() => {
+        if (particle.parentNode) {
+            particle.remove();
+        }
+    }, 15000);
+}
+
+// Create particles periodically
+setInterval(createParticle, 2000);
+
+// Header background change on scroll
+window.addEventListener('scroll', () => {
+    const header = document.querySelector('.header');
+    if (header) {
+        if (window.scrollY > 100) {
+            header.style.background = 'rgba(0, 0, 0, 0.9)';
+        } else {
+            header.style.background = 'rgba(0, 0, 0, 0.1)';
+        }
+    }
+});
