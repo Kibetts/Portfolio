@@ -214,3 +214,55 @@ const revealSections = () => {
 };
 
 window.addEventListener('scroll', revealSections);
+
+// Wait for DOM to be fully loaded
+document.addEventListener('DOMContentLoaded', function() {
+    // Contact Modal Functionality
+    const contactModal = document.getElementById('contactModal');
+    const letsTalkBtn = document.querySelector('.cta-btn'); // "Let's Talk" button in nav
+    const hireMeBtn = document.getElementById('hireMeBtn');
+    const closeModal = document.getElementById('closeModal');
+    const cancelBtn = document.getElementById('cancelBtn');
+    const contactForm = document.getElementById('contactForm');
+    const downloadCvBtn = document.getElementById('downloadCvBtn');
+
+    // Also handle "Book Now" button in floating card
+    const bookNowBtn = document.querySelector('.floating-card button');
+
+    // Open modal functions
+    function openContactModal() {
+        if (contactModal) {
+            contactModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+    }
+
+    function closeContactModal() {
+        if (contactModal) {
+            contactModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+            clearFormErrors();
+        }
+    }
+
+    // Event listeners for opening modal
+    if (letsTalkBtn) {
+        letsTalkBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            openContactModal();
+        });
+    }
+
+    if (hireMeBtn) {
+        hireMeBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            openContactModal();
+        });
+    }
+
+    if (bookNowBtn) {
+        bookNowBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            openContactModal();
+        });
+    }
