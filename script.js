@@ -174,3 +174,43 @@ document.querySelectorAll('.btn-primary, .btn-secondary, .cta-btn').forEach(btn 
         }, 600);
     });
 });
+
+// Add ripple animation keyframes
+const rippleStyle = document.createElement('style');
+rippleStyle.textContent = `
+    @keyframes ripple {
+        to {
+            transform: scale(4);
+            opacity: 0;
+        }
+    }
+`;
+document.head.appendChild(rippleStyle);
+
+// Parallax effect for floating cards
+window.addEventListener('scroll', () => {
+    const scrolled = window.pageYOffset;
+    const parallax = document.querySelectorAll('.floating-card');
+    
+    parallax.forEach((card, index) => {
+        const speed = 0.1 + (index * 0.05);
+        const yPos = -(scrolled * speed);
+        card.style.transform = `translateY(${yPos}px)`;
+    });
+});
+
+// Add smooth reveal animation for sections
+const revealSections = () => {
+    const sections = document.querySelectorAll('section');
+    
+    sections.forEach(section => {
+        const sectionTop = section.getBoundingClientRect().top;
+        const sectionVisible = 150;
+        
+        if (sectionTop < window.innerHeight - sectionVisible) {
+            section.classList.add('visible');
+        }
+    });
+};
+
+window.addEventListener('scroll', revealSections);
