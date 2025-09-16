@@ -392,3 +392,61 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 2000);
         });
     }
+     // CV Download Functionality
+    if (downloadCvBtn) {
+        downloadCvBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            downloadCV();
+        });
+    }
+
+    function downloadCV() {
+    const pdfUrl = './assets/Brian_Kibet_CV.pdf'; 
+    
+    // Show loading feedback
+    const originalText = downloadCvBtn.textContent;
+    downloadCvBtn.textContent = 'Downloading...';
+    downloadCvBtn.disabled = true;
+    
+    // Check if file exists before attempting download
+    fetch(pdfUrl, { method: 'HEAD' })
+        .then(response => {
+            if (response.ok) {
+                // File exists, proceed with download
+                const a = document.createElement('a');
+                a.href = pdfUrl;
+                a.download = 'Brian_Kibet_CV.pdf';
+                a.target = '_blank'; // Fallback to open in new tab
+                
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                
+                // Show success feedback
+                downloadCvBtn.textContent = '✓ Downloaded!';
+                downloadCvBtn.style.background = '#4CAF50';
+                
+                setTimeout(() => {
+                    downloadCvBtn.textContent = originalText;
+                    downloadCvBtn.style.background = '';
+                    downloadCvBtn.disabled = false;
+                }, 2000);
+            } else {
+                throw new Error('File not found');
+            }
+        })
+        .catch(error => {
+            console.error('CV download failed:', error);
+            
+            // Show error feedback
+            downloadCvBtn.textContent = 'File not found';
+            downloadCvBtn.style.background = '#ff4757';
+            
+            setTimeout(() => {
+                downloadCvBtn.textContent = originalText;
+                downloadCvBtn.style.background = '';
+                downloadCvBtn.disabled = false;
+            }, 3000);
+        });
+}
+});
