@@ -374,8 +374,8 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // send email 
             emailjs.send("service_sdvfyy3", "template_2wq4fag", {
-                from_name: formData.name,
-                from_email: formData.email,
+                name: formData.name,
+                email: formData.email,
                 message: formData.message,
                 to_name: "Brian Kibet",
                 reply_to: formData.email
