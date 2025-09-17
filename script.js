@@ -1,4 +1,4 @@
-// Smooth scrolling for navigation links
+// smooth scrolling for navigation links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
@@ -11,7 +11,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Fade in animation on scroll
+// fade in animation on scroll
 const observerOptions = {
     threshold: 0.1,
     rootMargin: '0px 0px -50px 0px'
@@ -29,7 +29,7 @@ document.querySelectorAll('.fade-in').forEach(el => {
     observer.observe(el);
 });
 
-// Counter animation function
+// counter animation function
 function animateCounter(element, target, duration = 2000) {
     let start = 0;
     let increment = target / (duration / 16);
@@ -45,7 +45,6 @@ function animateCounter(element, target, duration = 2000) {
     }, 16);
 }
 
-// Animate counters when they come into view
 const counters = document.querySelectorAll('.stat-number');
 const counterObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -61,7 +60,7 @@ counters.forEach(counter => {
     counterObserver.observe(counter);
 });
 
-// Particle system
+// particles 
 function createParticle() {
     const particle = document.createElement('div');
     particle.classList.add('particle');
@@ -79,10 +78,9 @@ function createParticle() {
     }, 15000);
 }
 
-// Create particles periodically
 setInterval(createParticle, 2000);
 
-// Header background change on scroll
+// header background change on scroll
 window.addEventListener('scroll', () => {
     const header = document.querySelector('.header');
     if (header) {
@@ -94,20 +92,19 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// Mobile menu functionality
+// mobile menu functionality
 function initMobileMenu() {
     const menuToggle = document.createElement('div');
     menuToggle.innerHTML = '☰';
     menuToggle.classList.add('menu-toggle');
     
-    // Insert menu toggle before the CTA button
     const nav = document.querySelector('.nav');
     const ctaBtn = document.querySelector('.cta-btn');
     if (nav && ctaBtn) {
         nav.insertBefore(menuToggle, ctaBtn);
     }
 
-    // Toggle mobile menu
+    // toggle mobile menu
     menuToggle.addEventListener('click', () => {
         const navLinks = document.querySelector('.nav-links');
         if (navLinks) {
@@ -116,7 +113,6 @@ function initMobileMenu() {
         }
     });
 
-    // Close mobile menu when clicking on a link
     document.querySelectorAll('.nav-links a').forEach(link => {
         link.addEventListener('click', () => {
             const navLinks = document.querySelector('.nav-links');
@@ -128,10 +124,9 @@ function initMobileMenu() {
     });
 }
 
-// Initialize mobile menu
 initMobileMenu();
 
-// Add some interactive effects to service cards
+// effects to service cards
 document.querySelectorAll('.service-card').forEach(card => {
     card.addEventListener('mouseenter', function() {
         this.style.transform = 'translateY(-10px) scale(1.02)';
@@ -142,10 +137,10 @@ document.querySelectorAll('.service-card').forEach(card => {
     });
 });
 
-// Add click effect to buttons
+// click effect to buttons
 document.querySelectorAll('.btn-primary, .btn-secondary, .cta-btn').forEach(btn => {
     btn.addEventListener('click', function(e) {
-        // Create ripple effect
+        // ripple effect
         const ripple = document.createElement('span');
         const rect = this.getBoundingClientRect();
         const size = Math.max(rect.width, rect.height);
@@ -175,7 +170,7 @@ document.querySelectorAll('.btn-primary, .btn-secondary, .cta-btn').forEach(btn 
     });
 });
 
-// Add ripple animation keyframes
+// ripple animation keyframes
 const rippleStyle = document.createElement('style');
 rippleStyle.textContent = `
     @keyframes ripple {
@@ -199,7 +194,7 @@ window.addEventListener('scroll', () => {
     });
 });
 
-// Add smooth reveal animation for sections
+// smooth reveal animation for sections
 const revealSections = () => {
     const sections = document.querySelectorAll('section');
     
@@ -215,21 +210,23 @@ const revealSections = () => {
 
 window.addEventListener('scroll', revealSections);
 
-// Wait for DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', function() {
-    // Contact Modal Functionality
     const contactModal = document.getElementById('contactModal');
-    const letsTalkBtn = document.querySelector('.cta-btn'); // "Let's Talk" button in nav
+    const letsTalkBtn = document.querySelector('.cta-btn'); // "Let's Talk"
     const hireMeBtn = document.getElementById('hireMeBtn');
     const closeModal = document.getElementById('closeModal');
     const cancelBtn = document.getElementById('cancelBtn');
     const contactForm = document.getElementById('contactForm');
     const downloadCvBtn = document.getElementById('downloadCvBtn');
 
-    // Also handle "Book Now" button in floating card
+    // init email
+    (function() {
+        emailjs.init("bhnUjdm0gi-opTgJ8"); 
+    })();
+
     const bookNowBtn = document.querySelector('.floating-card button');
 
-    // Open modal functions
+    // open modal functions
     function openContactModal() {
         if (contactModal) {
             contactModal.classList.add('active');
@@ -245,7 +242,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Event listeners for opening modal
+    // opening modal
     if (letsTalkBtn) {
         letsTalkBtn.addEventListener('click', (e) => {
             e.preventDefault();
@@ -266,7 +263,7 @@ document.addEventListener('DOMContentLoaded', function() {
             openContactModal();
         });
     }
-    // Event listeners for closing modal
+    // closing modal
     if (closeModal) {
         closeModal.addEventListener('click', closeContactModal);
     }
@@ -275,7 +272,7 @@ document.addEventListener('DOMContentLoaded', function() {
         cancelBtn.addEventListener('click', closeContactModal);
     }
 
-    // Close modal when clicking outside
+    // close modal when clicking outside
     if (contactModal) {
         contactModal.addEventListener('click', (e) => {
             if (e.target === contactModal) {
@@ -284,14 +281,12 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Close modal with Escape key
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && contactModal && contactModal.classList.contains('active')) {
             closeContactModal();
         }
     });
 
-     // Form validation and submission
     function validateForm(formData) {
         const errors = {};
         
@@ -311,10 +306,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function displayFormErrors(errors) {
-        // Clear previous errors
         clearFormErrors();
         
-        // Display new errors
         Object.keys(errors).forEach(field => {
             const errorElement = document.getElementById(`${field}Error`);
             const inputElement = document.getElementById(field);
@@ -338,7 +331,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (contactForm) {
             const successDiv = document.createElement('div');
             successDiv.className = 'success-message';
-            successDiv.innerHTML = '✅ Thank you! Your message has been sent successfully. I\'ll get back to you soon!';
+            successDiv.innerHTML = 'Thank you! Your message has been sent successfully. I\'ll get back to you soon!';
             
             contactForm.parentNode.insertBefore(successDiv, contactForm);
             
@@ -350,7 +343,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    / Handle form submission
+    // handle form submission
     if (contactForm) {
         contactForm.addEventListener('submit', (e) => {
             e.preventDefault();
@@ -368,7 +361,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
             
-            // Show loading state
+            // loading state
             const submitBtn = document.getElementById('submitBtn');
             const btnText = submitBtn.querySelector('.btn-text');
             const btnLoader = submitBtn.querySelector('.btn-loader');
@@ -379,9 +372,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 submitBtn.disabled = true;
             }
             
-            // Simulate email sending (replace with actual email service)
-            setTimeout(() => {
-                console.log('Form submitted:', formData);
+            // send email 
+            emailjs.send("service_sdvfyy3", "template_2wq4fag", {
+                from_name: formData.name,
+                from_email: formData.email,
+                message: formData.message,
+                to_name: "Brian Kibet",
+                reply_to: formData.email
+            })
+            .then(function(response) {
+                console.log('Email sent successfully:', response);
                 
                 if (btnText && btnLoader) {
                     btnText.style.display = 'inline-block';
@@ -389,10 +389,39 @@ document.addEventListener('DOMContentLoaded', function() {
                     submitBtn.disabled = false;
                 }
                 showSuccessMessage();
-            }, 2000);
+            })
+            .catch(function(error) {
+                console.error('Email failed to send:', error);
+                
+                if (btnText && btnLoader) {
+                    btnText.style.display = 'inline-block';
+                    btnLoader.style.display = 'none';
+                    submitBtn.disabled = false;
+                }
+                
+                if (contactForm) {
+                    const errorDiv = document.createElement('div');
+                    errorDiv.className = 'error-message';
+                    errorDiv.style.cssText = `
+                        background: linear-gradient(45deg, #ff6b6b, #ff5252);
+                        color: white;
+                        padding: 1rem;
+                        border-radius: 8px;
+                        text-align: center;
+                        margin-bottom: 1rem;
+                    `;
+                    errorDiv.textContent = 'Failed to send message. Please try again or contact me directly.';
+                    
+                    contactForm.parentNode.insertBefore(errorDiv, contactForm);
+                    
+                    setTimeout(() => {
+                        errorDiv.remove();
+                    }, 5000);
+                }
+            });
         });
     }
-     // CV Download Functionality
+
     if (downloadCvBtn) {
         downloadCvBtn.addEventListener('click', (e) => {
             e.preventDefault();
@@ -403,26 +432,26 @@ document.addEventListener('DOMContentLoaded', function() {
     function downloadCV() {
     const pdfUrl = './assets/Brian_Kibet_CV.pdf'; 
     
-    // Show loading feedback
+    // show loading feedback
     const originalText = downloadCvBtn.textContent;
     downloadCvBtn.textContent = 'Downloading...';
     downloadCvBtn.disabled = true;
     
-    // Check if file exists before attempting download
+    // check if file exists before downloading
     fetch(pdfUrl, { method: 'HEAD' })
         .then(response => {
             if (response.ok) {
-                // File exists, proceed with download
+                // file exists, proceed with download
                 const a = document.createElement('a');
                 a.href = pdfUrl;
                 a.download = 'Brian_Kibet_CV.pdf';
-                a.target = '_blank'; // Fallback to open in new tab
+                a.target = '_blank';
                 
                 document.body.appendChild(a);
                 a.click();
                 document.body.removeChild(a);
                 
-                // Show success feedback
+                // show success feedback
                 downloadCvBtn.textContent = '✓ Downloaded!';
                 downloadCvBtn.style.background = '#4CAF50';
                 
@@ -438,7 +467,7 @@ document.addEventListener('DOMContentLoaded', function() {
         .catch(error => {
             console.error('CV download failed:', error);
             
-            // Show error feedback
+            // show error feedback
             downloadCvBtn.textContent = 'File not found';
             downloadCvBtn.style.background = '#ff4757';
             
